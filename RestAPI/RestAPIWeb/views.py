@@ -6,7 +6,8 @@ import json as simplejson
 import decimal
 
 def get_all_result_list(request):
-	data = serializers.serialize('json', Results.objects.order_by('-point'))
+	myClass = MyClass()
+	data = myClass.GetAll()
 	#records=Results.objects.all()
 
 	return HttpResponse(data, mimetype="application/json")
@@ -35,7 +36,12 @@ def post_new_user(request):
 	
 	
 	
-	data = serializers.serialize('json', Results.objects.order_by('-point'))
+	myClass = MyClass()
+	data = myClass.GetAll()
 	return HttpResponse(data, mimetype="application/json")
 
+class MyClass:
+    def GetAll(self):
+        return serializers.serialize('json', Results.objects.order_by('-point'))
+	
 # Create your views here.
